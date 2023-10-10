@@ -1,6 +1,9 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-}
+// next.config.js
+const { parsed: localEnv } = require('dotenv').config();
+import { EnvironmentPlugin } from 'webpack';
 
-module.exports = nextConfig
+export const reactStrictMode = true;
+export function webpack(config) {
+  config.plugins.push(new EnvironmentPlugin(localEnv));
+  return config;
+}
