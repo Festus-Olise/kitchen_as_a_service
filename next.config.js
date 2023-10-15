@@ -1,9 +1,11 @@
 // next.config.js
 const { parsed: localEnv } = require('dotenv').config();
-import { EnvironmentPlugin } from 'webpack';
+const webpack = require('webpack');
 
-export const reactStrictMode = true;
-export function webpack(config) {
-  config.plugins.push(new EnvironmentPlugin(localEnv));
-  return config;
-}
+module.exports = {
+  reactStrictMode: true,
+  webpack(config) {
+    config.plugins.push(new webpack.EnvironmentPlugin(localEnv));
+    return config;
+  },
+};
